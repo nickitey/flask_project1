@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from data import title, subtitle, description, departures, tours
+from data import title, subtitle, description, departures, tours, background
 
 
 app = Flask(__name__)
@@ -13,7 +13,8 @@ def render_departure():
 @app.route('/')
 def render_index():
     return render_template('index.html', description=description,
-                           departures=departures, tours=tours, title=title, subtitle=subtitle)
+                           departures=departures, tours=tours, title=title,
+                           background=background, subtitle=subtitle)
 
 
 @app.route('/tours/<tour>')

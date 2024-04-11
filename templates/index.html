@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% block container %}
-<!-- HERO -->
-    <section class="jumbotron text-center mt-4" style="background: url('https://place-hold.it/1600x300'); background-position: center center">
+<main class="container">
+    <section class="jumbotron text-center mt-4" style="background: url({{ background }}); background-position: center center">
       <h1 class="display-4">Всякие туры</h1>
       <p class="lead">{{ subtitle }}</p>
       <p class="mt-5 w-50 mx-auto">{{ description }}</p>
     </section>
     <!-- CARDS -->
     <div class="row mt-5">
+
       {% for link, tour in tours.items() %}
         {% if link <= 6 %}
+
         <div class="col-4">
           <div class="card mb-4">
             <div class="embed-responsive embed-responsive-16by9">
@@ -22,7 +24,10 @@
             </div>
           </div>
         </div>
+
         {% endif %}
       {% endfor %}
+
     </div>
+</main>
 {% endblock %}

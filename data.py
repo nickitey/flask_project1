@@ -5,6 +5,9 @@ description = """Лучшие направления, где никто не б�
 departures = {"msk": "Из Москвы", "spb": "Из Петербурга", "nsk": "Из Новосибирска", "ekb": "Из Екатеринбурга",
               "kazan": "Из Казани"}
 
+background = ('https://images.unsplash.com/photo-1621955582958-395e51cf45a4?q=80&w=1943&auto=format&fit=crop&w=1600&q'
+              '=300&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')
+
 tours = {
     1: {
         "title": "Marina Lake Hotel & Spa",
