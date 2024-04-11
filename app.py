@@ -16,9 +16,11 @@ def render_index():
                            departures=departures, tours=tours, title=title, subtitle=subtitle)
 
 
-@app.route('/<tour>')
+@app.route('/tours/<tour>')
 def render_tour(tour):
-    return render_template('tour.html')
+    tour_key = int(tour)
+    return render_template('tour.html', tour=tours[tour_key],
+                           departures=departures, title=title)
 
 
 app.run('0.0.0.0', 8000)
