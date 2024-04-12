@@ -5,9 +5,15 @@ from data import title, subtitle, description, departures, tours, background
 app = Flask(__name__)
 
 
-@app.route('/departure')
-def render_departure():
-    return render_template('departure.html')
+@app.route('/departures/<direction>')
+def render_departure(direction):
+    directions = {}
+    for tour in tours:
+        if tours[tour]['departure'] == direction:
+            directions[tour] = tours[tour]
+    return render_template('departure.html', departure=departures[direction],
+                           tours=tours, directions=directions, departures=departures,
+                           title=title)
 
 
 @app.route('/')

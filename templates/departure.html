@@ -1,18 +1,43 @@
 {% extends 'base.html' %}
 {% block container %}
+{% set ns = namespace(min_price = 99999999999, max_price = 0, min_dur = 9999999999999, max_dur = 0) %}
+{% for dir in directions %}
+    {% if directions[dir].price > ns.max_price %}
+        {% set ns.max_price = directions[dir].price %}
+    {% elif directions[dir].price < ns.min_price %}
+        {% set ns.min_price = directions[dir].price %}
+    {% endif %}
+    {% if directions[dir].nights > ns.max_dur %}
+        {% set ns.max_dur = directions[dir].nights %}
+    {% elif directions[dir].nights < ns.min_dur %}
+        {% set ns.min_dur = directions[dir].nights %}
+    {% endif %}
+{% endfor %}
+
+
   <main class="container mt-3">
-    <h1 class="display-5 mt-4">Летим из Новосибирска</h1>
-    <p class="mb-4">Найдено 15 туров, от 26 000 до 84 600 и от 4 ночей до 15 ночей</p>
+    <h1 class="display-5 mt-4">Летим {{ departure.split()[0].lower() }} {{ departure.split()[1] }}</h1>
+    {% set amount = directions|length %}
+    <p class="mb-4">
+          {% if amount == 1 %} Найден {{ amount }} тур
+          {% elif amount <= 4%} Найдено {{ amount }} тура
+          {% else %} Найдено {{ amount }} туров
+          {% endif %} от {{ ns.min_price }} каких-то денег до {{ ns.max_price }} каких-то денег
+        и от {{ ns.min_dur }} ночей до {{ ns.max_dur }} ночей</p>
     <!-- CARDS -->
-    <div class="row mt-5">
-      <div class="col-4">
-        <div class="card mb-4">
-          <img src="https://place-hold.it/300x200" class="card-img-top img-fluid" alt="">
-          <div class="card-body">
-            <h2 class="h5 card-title">Hotel title</h2>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-sm btn-primary">Подробнее</a>
+    {% for tour in directions %}
+        <div class="row mt-5">
+          <div class="col-4">
+            <div class="card mb-4">
+              <img src="{{ tours[tour].picture }}" class="card-img-top img-fluid" alt="{{ tours[tour].title }}">
+              <div class="card-body">
+                <h2 class="h5 card-title">{{ directions[tour].title }}</h2>
+                <p class="card-text">{{ directions[tour].description|truncate(70) }}</p>
+                <a href="/tours/{{ tour }}" class="btn btn-sm btn-primary">Подробнее</a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+    {% endfor %}
+  </main>
 {% endblock %}

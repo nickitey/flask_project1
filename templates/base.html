@@ -18,14 +18,14 @@
         <ul class="navbar-nav">
 
           {% for direction in departures %}
-            {% if request.path == direction %}
+            {% if direction in request.path %}
               {% set c = "active" %}
 			{% else %}
               {% set c="" %}
             {% endif %}
 
           <li class="nav-item {{c}}">
-            <a class="nav-link" href="/{{ direction }}">{{ departures[direction] }}</a>
+            <a class="nav-link" href="/departures/{{ direction }}">{{ departures[direction] }}</a>
           </li>
 
           {% endfor %}
