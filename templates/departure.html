@@ -4,14 +4,17 @@
 {% for dir in directions %}
     {% if directions[dir].price > ns.max_price %}
         {% set ns.max_price = directions[dir].price %}
-    {% elif directions[dir].price < ns.min_price %}
+    {% endif %}
+    {% if directions[dir].price < ns.min_price %}
         {% set ns.min_price = directions[dir].price %}
     {% endif %}
     {% if directions[dir].nights > ns.max_dur %}
         {% set ns.max_dur = directions[dir].nights %}
-    {% elif directions[dir].nights < ns.min_dur %}
+    {% endif %}
+    {% if directions[dir].nights < ns.min_dur %}
         {% set ns.min_dur = directions[dir].nights %}
     {% endif %}
+
 {% endfor %}
 
 
